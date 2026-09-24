@@ -9,7 +9,7 @@ resources:
 images:
   - name: sd3-api
     newName: swr.eu-de.otc.t-systems.com/stackmon/status-dashboard
-    newTag: sha-16f5eba
+    newTag: sha-940f52a
 
 configMapGenerator:
   - name: sd3-vault-config
@@ -28,7 +28,7 @@ patchesStrategicMerge:
           more_set_headers "Content-Security-Policy: frame-ancestors 'none'";
     spec:
       rules:
-        - host: api.test.status.otc-service.com
+        - host: test.status.otc-service.com
           http:
             paths:
             - path: /
@@ -40,5 +40,7 @@ patchesStrategicMerge:
                     number: 8000
       tls:
       - hosts:
-        - api.test.status.otc-service.com
-        secretName: sd3-cert-test
+        - test.status.otc-service.com
+        # Reused from the retired frontend ingress: the certificate is already
+        # issued for this exact hostname.
+        secretName: sd3-front-cert-test

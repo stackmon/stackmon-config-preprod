@@ -11,7 +11,7 @@ environments:
     attributes:
       region: EU-NL
 status_dashboard:
-  url: https://api.test.status.otc-service.com
+  url: https://test.status.otc-service.com
   oidc_issuer: https://zitadel.eco-preprod.tsi-dev.otc-service.com
   oidc_key_file: /cloudmon/service-account.json
   oidc_scopes:

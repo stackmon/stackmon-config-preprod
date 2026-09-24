@@ -23,6 +23,9 @@ export SD_DB={{ .Data.data.dburl }}
 {{- end }}
 export SD_CACHE=internal
 export SD_LOG_LEVEL=devel
+# The OBS static website endpoint the backend proxies every path the API does
+# not own. Host only: OBS picks the bucket from the Host header and ignores SNI.
+export SD_STATIC_ORIGINS=status-dashboard-test.obs-website.eu-de.otc.t-systems.com
 export SD_OIDC_ISSUER=https://zitadel.eco-preprod.tsi-dev.otc-service.com
 export SD_OIDC_CLIENT_ID=390700708019568682
 export SD_OIDC_USERNAME_CLAIM=client_id
