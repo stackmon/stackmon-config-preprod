@@ -9,7 +9,7 @@ resources:
 images:
   - name: sd3-api
     newName: swr.eu-de.otc.t-systems.com/stackmon/status-dashboard
-    newTag: sha-82dd29d
+    newTag: sha-16f5eba
 
 configMapGenerator:
   - name: sd3-vault-config

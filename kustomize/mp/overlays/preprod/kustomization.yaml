@@ -10,7 +10,7 @@ resources:
 images:
   - name: metrics-processor
     newName: swr.eu-de.otc.t-systems.com/stackmon/metrics-processor
-    newTag: sha-ddd0c03
+    newTag: sha-b46273a
 
 labels:
   - pairs:
