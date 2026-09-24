@@ -8,7 +8,7 @@ resources:
 
 images:
   - name: sd3-api
-    newName: swr.eu-de.otc.t-systems.com/stackmon-preprod/status-dashboard-backend
+    newName: swr.eu-de.otc.t-systems.com/stackmon/status-dashboard
     newTag: sha-82dd29d
 
 configMapGenerator:
