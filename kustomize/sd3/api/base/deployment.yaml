@@ -15,6 +15,10 @@ spec:
         app: sd3-api
     spec:
       serviceAccount: sd3
+      # SWR is private; the secret is replicated to every namespace by
+      # kubernetes-replicator (see system-config pull-secrets chart).
+      imagePullSecrets:
+        - name: swr-secret
       containers:
       - name: sd3-api
         image: sd3-api

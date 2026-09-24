@@ -20,6 +20,10 @@ spec:
     spec:
       serviceAccountName: metrics-processor
       terminationGracePeriodSeconds: 10
+      # SWR is private; the secret is replicated to every namespace by
+      # kubernetes-replicator (see system-config pull-secrets chart).
+      imagePullSecrets:
+        - name: swr-secret
       containers:
         - name: convertor
           image: metrics-processor
