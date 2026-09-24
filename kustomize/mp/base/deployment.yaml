@@ -79,6 +79,10 @@ spec:
             - name: instance-confd
               mountPath: /cloudmon/conf.d
               readOnly: true
+            - name: oidc-key
+              mountPath: /cloudmon/service-account.json
+              subPath: service-account.json
+              readOnly: true
       volumes:
         - name: instance-config
           configMap:
@@ -86,3 +90,9 @@ spec:
         - name: instance-confd
           configMap:
             name: metrics-processor-confd
+        - name: oidc-key
+          secret:
+            secretName: metrics-processor-oidc
+            items:
+              - key: service-account.json
+                path: service-account.json

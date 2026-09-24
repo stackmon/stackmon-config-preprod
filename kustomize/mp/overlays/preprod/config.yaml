@@ -10,3 +10,10 @@ environments:
   - name: production_eu-nl
     attributes:
       region: EU-NL
+status_dashboard:
+  url: https://api.test.status.otc-service.com
+  oidc_issuer: https://zitadel.eco-preprod.tsi-dev.otc-service.com
+  oidc_key_file: /cloudmon/service-account.json
+  oidc_scopes:
+    - "urn:zitadel:iam:org:project:role:sd_reporters"
+    - "urn:zitadel:iam:org:project:id:390700708019568682:aud"

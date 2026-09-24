@@ -5,6 +5,7 @@ namespace: sd3-test
 
 resources:
   - ../../base
+  - secret.yaml
 
 images:
   - name: metrics-processor
@@ -26,16 +27,3 @@ configMapGenerator:
       - flag_metrics.yaml=conf.d/flag_metrics.yaml
       - health_metrics.yaml=conf.d/health_metrics.yaml
       - metric_templates.yaml=conf.d/metric_templates.yaml
-
-patches:
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: metrics-processor
-      spec:
-        template:
-          spec:
-            containers:
-              - name: reporter
-                $patch: delete
