@@ -62,7 +62,9 @@ spec:
         # auth/kubernetes with role sd3 (see the test overlay vault-agent.hcl).
         - name: "VAULT_ADDR"
           value: "http://vault-preprod-active.vault.svc.cluster.local:8200"
-        image: "hashicorp/vault"
+        # Pinned: an untagged reference resolves to hashicorp/vault:latest,
+        # which is Agent v2.x and hangs on KVv2 reads against the 1.19.0 server.
+        image: "hashicorp/vault:1.19.0"
         resources:
           limits:
             cpu: "300m"
