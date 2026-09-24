@@ -53,15 +53,11 @@ spec:
         - "-c"
         - "vault agent -config=/etc/vault/vault-agent.hcl -exit-after-auth=true"
         env:
-        # The VM vault is being retired and its certificate is only valid for
-        # vault1, so anything using the vault-lb name fails TLS verification.
-        # The in-cluster vault presents a certificate signed by its own CA,
-        # which this image does not trust, hence VAULT_SKIP_VERIFY - the same
-        # setting the ArgoCD vault plugin uses to reach it.
+        # Preprod in-cluster Vault (ns vault), HTTP with TLS disabled, so no
+        # VAULT_SKIP_VERIFY is needed. The kubernetes auth method is mounted at
+        # auth/kubernetes with role sd3 (see the test overlay vault-agent.hcl).
         - name: "VAULT_ADDR"
-          value: "https://vault-otcinfra2.vault.svc.cluster.local:8200"
-        - name: "VAULT_SKIP_VERIFY"
-          value: "true"
+          value: "http://vault-preprod-active.vault.svc.cluster.local:8200"
         image: "hashicorp/vault"
         resources:
           limits:
