@@ -20,7 +20,6 @@ template {
   contents = <<EOT
 {{ with secret "secret/data/statusdashboard/sd3-test" -}}
 export SD_DB={{ .Data.data.dburl }}
-{{- end }}
 export SD_CACHE=internal
 export SD_LOG_LEVEL=devel
 # The OBS static website endpoint the backend proxies every path the API does
@@ -50,6 +49,7 @@ export SD_SMTP_USER=otc00000000001000000448_3@otc-eu-de.mms.t-systems-service.co
 export SD_SMTP_PASSWORD={{ .Data.data.smtp_password }}
 export SD_SMTP_TLS=false
 export SD_SMTP_TIMEOUT=30s
+{{- end }}
 EOT
   perms = "0664"
 }
