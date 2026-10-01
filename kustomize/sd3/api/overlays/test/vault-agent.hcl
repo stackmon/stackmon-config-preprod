@@ -33,6 +33,23 @@ export SD_RBAC_ROLES_ADMINS=sd_admins
 export SD_RBAC_ROLES_OPERATORS=sd_operators
 export SD_RBAC_ROLES_CREATORS=sd_creators
 export SD_RBAC_ROLES_REPORTERS=sd_reporters
+# Maintenance email notifications (PR #42). SMTP goes through the OTC Secure
+# Mail Gateway; the password is injected from Vault.
+export SD_NOTIFICATIONS_ENABLED=true
+export SD_NOTIFICATIONS_LEASE_TIMEOUT=60s
+export SD_NOTIFICATIONS_MAX_ATTEMPTS=5
+export SD_NOTIFICATIONS_BACKOFF_INTERVAL=5m
+export SD_NOTIFICATIONS_SMOD_EMAIL=aloento@outlook.com
+export SD_NOTIFICATIONS_EMAILS_OPERATORS=aloento@outlook.com
+export SD_NOTIFICATIONS_EMAILS_ADMINS=aloento@outlook.com
+export SD_WEB_URL=https://test.status.otc-service.com
+export SD_SMTP_HOST=otc-de-out.mms.t-systems-service.com
+export SD_SMTP_PORT=25
+export SD_SMTP_FROM=otc00000000001000000448_3@otc-eu-de.mms.t-systems-service.com
+export SD_SMTP_USER=otc00000000001000000448_3@otc-eu-de.mms.t-systems-service.com
+export SD_SMTP_PASSWORD={{ .Data.data.smtp_password }}
+export SD_SMTP_TLS=false
+export SD_SMTP_TIMEOUT=30s
 EOT
   perms = "0664"
 }
