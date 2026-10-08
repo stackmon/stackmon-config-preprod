@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: openreview
+  labels:
+    app.kubernetes.io/name: openreview
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    # A pull_request webhook carries the whole patch set; the 1m default makes
+    # nginx answer 413 before the request reaches the service, and the service
+    # never sees the event.
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: bot.aloen.to
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: openreview
+                port:
+                  number: 8090
+  tls:
+    - hosts:
+        - bot.aloen.to
+      secretName: openreview-cert

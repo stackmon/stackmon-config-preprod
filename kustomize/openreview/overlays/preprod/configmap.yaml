@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: openreview-config
+  labels:
+    app.kubernetes.io/name: openreview
+data:
+  # HOST has to be explicit: the service binds 127.0.0.1 by default, which is
+  # what systemd wanted but leaves the Service and both probes unreachable.
+  HOST: "0.0.0.0"
+  PORT: "8090"
+  # Read-only checkouts land here; /data is the writable emptyDir.
+  WORKSPACE_ROOT: /data/workspaces
+  HOME: /data
+  LOG_LEVEL: info
+  AUTO_APPROVE: "true"
+  TRUSTED_ASSOCIATIONS: OWNER,MEMBER,COLLABORATOR
+  REVIEW_FORK_PRS: "false"
+  MAX_AGENT_STEPS: "12"
+  RUN_TIMEOUT_MS: "1800000"

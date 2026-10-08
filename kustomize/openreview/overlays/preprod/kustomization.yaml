@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: openreview
+
+resources:
+  - ../../base
+  - configmap.yaml
+  - secret.yaml
+  - ingress.yaml
+
+images:
+  - name: openreview
+    newName: swr.eu-de.otc.t-systems.com/stackmon/openreview
+    newTag: REPLACE_WITH_SHA_TAG
+
+labels:
+  - pairs:
+      app.kubernetes.io/instance: preprod
+      app.kubernetes.io/managed-by: argocd
+      environment: preprod
