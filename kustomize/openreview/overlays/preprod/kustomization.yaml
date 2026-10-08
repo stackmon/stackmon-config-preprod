@@ -12,7 +12,7 @@ resources:
 images:
   - name: openreview
     newName: swr.eu-de.otc.t-systems.com/stackmon/openreview
-    newTag: REPLACE_WITH_SHA_TAG
+    newTag: sha-235368c
 
 labels:
   - pairs:
