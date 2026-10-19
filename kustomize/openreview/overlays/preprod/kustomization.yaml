@@ -5,14 +5,30 @@ namespace: openreview
 
 resources:
   - ../../base
-  - configmap.yaml
   - secret.yaml
   - ingress.yaml
+
+# Runtime settings and the tenant registry are generated ConfigMaps: their
+# names carry a content hash, so an edit rolls the Deployment on the next
+# ArgoCD sync. Adding an organization is a Git change, not a kubectl command
+# and not an image rebuild.
+configMapGenerator:
+  - name: openreview-config
+    envs:
+      - config.env
+  - name: openreview-tenants
+    files:
+      - TENANTS_JSON=tenants.json
+    # Bump this when rotating a tenant secret in Vault without any change to
+    # config.env or tenants.json: the new hash rolls the pod so the new value
+    # is read. Adding a tenant changes tenants.json, so it needs no bump.
+    literals:
+      - SECRET_REVISION=1
 
 images:
   - name: openreview
     newName: swr.eu-de.otc.t-systems.com/stackmon/openreview
-    newTag: sha-99e594a
+    newTag: sha-72234c8
 
 labels:
   - pairs:

@@ -43,6 +43,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: openreview-config
+            # Generated from overlays/preprod/tenants.json; the hash suffix in
+            # the generated name makes a registry change roll the Deployment.
+            - configMapRef:
+                name: openreview-tenants
             - secretRef:
                 name: openreview-env
           resources:

@@ -1,0 +1,11 @@
+[
+  {
+    "key": "stackmon",
+    "org": "stackmon",
+    "appId": "5135070",
+    "installationId": 166516466,
+    "slug": "ecosquad-autoreview",
+    "privateKeyEnv": "GITHUB_APP_PRIVATE_KEY",
+    "webhookSecretEnv": "GITHUB_APP_WEBHOOK_SECRET"
+  }
+]
