@@ -44,6 +44,19 @@ patchesStrategicMerge:
     metadata:
       name: sd3-api-ingress
       annotations:
+        # WAF front door: DNS-01 instead of the HTTP-01 issuer from base. The
+        # host's only record will point at the dedicated WAF ELB, which has no
+        # port 80, so HTTP-01 could never renew again. ECDSA P-384 in PKCS8
+        # form because that is what the certificate sync in the system-config
+        # repository (overlay test-status) uploads to the ELB verbatim.
+        cert-manager.io/cluster-issuer: otc-dns01
+        cert-manager.io/private-key-algorithm: ECDSA
+        cert-manager.io/private-key-size: "384"
+        cert-manager.io/private-key-encoding: PKCS8
+        cert-manager.io/private-key-rotation-policy: Always
+        # Whitelist is active: the A record points at the WAF ELB, so only the
+        # WAF back-to-source subnet may reach this host.
+        nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.243.0/24"
         nginx.ingress.kubernetes.io/configuration-snippet: |
           more_set_headers "X-Frame-Options: DENY";
           more_set_headers "Content-Security-Policy: frame-ancestors 'none'";
