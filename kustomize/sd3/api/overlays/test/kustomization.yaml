@@ -54,8 +54,9 @@ patchesStrategicMerge:
         cert-manager.io/private-key-size: "384"
         cert-manager.io/private-key-encoding: PKCS8
         cert-manager.io/private-key-rotation-policy: Always
-        # WAF-only whitelist, enabled once the A record points at the WAF ELB.
-        # nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.243.0/24"
+        # Whitelist is active: the A record points at the WAF ELB, so only the
+        # WAF back-to-source subnet may reach this host.
+        nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.243.0/24"
         nginx.ingress.kubernetes.io/configuration-snippet: |
           more_set_headers "X-Frame-Options: DENY";
           more_set_headers "Content-Security-Policy: frame-ancestors 'none'";
