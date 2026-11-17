@@ -60,20 +60,6 @@ health_metrics:
         weight: 1
       - expression: "image.api_down"
         weight: 2
-  ### BMS
-  bms:
-    service: bms
-    component_name: "Bare Metal Server"
-    category: compute
-    metrics:
-      - bms.api_down
-      - bms.api_slow
-      - bms.api_success_rate_low
-    expressions:
-      - expression: "bms.api_slow || bms.api_success_rate_low"
-        weight: 1
-      - expression: "bms.api_down"
-        weight: 2
 
   ## Container
   ### CCE
@@ -233,20 +219,6 @@ health_metrics:
       - expression: "vpcep.api_slow || vpcep.api_success_rate_low"
         weight: 1
       - expression: "vpcep.api_down"
-        weight: 2
-  ### EIP
-  eip:
-    service: eip
-    component_name: "Elastic IP"
-    category: network
-    metrics:
-      - eip.api_down
-      - eip.api_slow
-      - eip.api_success_rate_low
-    expressions:
-      - expression: "eip.api_slow || eip.api_success_rate_low"
-        weight: 1
-      - expression: "eib.api_down"
         weight: 2
   ### ELB
   elb:
@@ -570,10 +542,12 @@ health_metrics:
         weight: 1
       - expression: "ctsv3.api_down_3min"
         weight: 2
-  ### Enterprise-Dashboard
+  ### Financial Dashboard
   enterprise-dashboard:
     service: enterprise-dashboard
-    component_name: "Enterprise Dashboard"
+    component_name: "Financial Dashboard"
+    component_attributes:
+      region: Global
     category: management
     metrics:
       - enterprise-dashboard.api_slow
@@ -778,6 +752,8 @@ health_metrics:
   console:
     service: console
     component_name: "T Cloud Public Console"
+    component_attributes:
+      region: Global
     category: global
     metrics:
       - console.api_slow
@@ -792,6 +768,8 @@ health_metrics:
   otc:
     service: otc
     component_name: "T Cloud Public"
+    component_attributes:
+      region: Global
     category: global
     metrics:
       - otc.api_slow
@@ -806,6 +784,8 @@ health_metrics:
   helpcenter:
     service: helpcenter
     component_name: "HelpCenter"
+    component_attributes:
+      region: Global
     category: global
     metrics:
       - helpcenter.api_slow
@@ -820,6 +800,8 @@ health_metrics:
   architecturecenter:
     service: architecturecenter
     component_name: "Architecture Center"
+    component_attributes:
+      region: Global
     category: global
     metrics:
       - architecturecenter.api_slow
@@ -834,6 +816,8 @@ health_metrics:
   community:
     service: community
     component_name: "T Cloud Public Community"
+    component_attributes:
+      region: Global
     category: global
     metrics:
       - community.api_slow
